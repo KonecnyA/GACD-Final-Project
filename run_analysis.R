@@ -53,7 +53,7 @@ df_total <- rbind(df_training, df_test)
 ## "select_names" is assigned the result of the "toMatch" search.
 select_names <- unique(grep(paste(c("-mean\\(\\)","-std\\(\\)"),collapse="|"), df_features$feature_variable_name, value=TRUE))
 
-## Subset the data frame keeping the variables requested: Subject_ID, Activity and select_names (search result).
+## Subset the data frame keeping the variables requested: subject_id, activity and select_names (search result).
 df_total <- df_total[, c("subject_id", "activity", select_names)]
 
 ## STEP 3. Use descriptive activity names to name the activities in the data set.
@@ -61,20 +61,19 @@ df_total$activity <- factor(df_total$activity, labels = df_activity_labels$activ
 
 ## STEP 4. Appropriately label the data set with descriptive variable names.
 ## Decided to follow Hadley Wickham's style guide - http://stat405.had.co.nz/r-style.html - lowercase_underscore_separated
-names(df_total) <- gsub("^t","time",names(df_total))         ## Time is more meaningful than t
-names(df_total) <- gsub("^f","frequency",names(df_total))    ## Frequency is more meaningful than f
-names(df_total) <- gsub("BodyBody","body",names(df_total))   ## Body vs BodyBody
-names(df_total) <- gsub("mean\\(\\)","mean",names(df_total)) ## Mean vs possible confusion a function call mean()
-names(df_total) <- gsub("std\\(\\)","std",names(df_total))   ## Std vs possible confusion a function call std()
-names(df_total) <- gsub("-","_",names(df_total))             ## Underscore "_" vs possible Subtract confusion "-"
-names(df_total) <- gsub("[a-z][A-Z]", paste(\1, "_", \2), names(df_total)) ## final conversion for style: lower_case_underscore_separated
-
+names(df_total) <- gsub("^t", "time", names(df_total))         ## Time is more meaningful than t
+names(df_total) <- gsub("^f", "frequency", names(df_total))    ## Frequency is more meaningful than f
+names(df_total) <- gsub("BodyBody", "body", names(df_total))   ## Body vs BodyBody
+names(df_total) <- gsub("mean\\(\\)", "Mean", names(df_total)) ## Mean vs possible confusion a function call mean()
+names(df_total) <- gsub("std\\(\\)", "Std", names(df_total))   ## Std vs possible confusion a function call std()
+names(df_total) <- gsub("-", "" , names(df_total))             ## Underscore "_" vs possible Subtract confusion "-"
+names(df_total) <- gsub("([A-Z])", "_\\1", names(df_total))    ## Convert to underscore_separated
+names(df_total) <- tolower(names(df_total))                    ## Ensure all text is lowercase
 
 ## STEP 5. Create a second, independent tidy dataset
-##         with the average of each variable for each activity and each subject.
+##         with the average of each variable for each activity and each subject_id.
 library(plyr)
-df_tidy_data <- ddply(df_total,c("Activity", "Subject_ID"), colwise(mean))
-## Note: may try to implement above using library(dplyr)
+df_tidy_data <- ddply(df_total,c("activity", "subject_id"), colwise(mean))
 
 write_and_check(df_tidy_data, 3, 68, "UCI HAR Dataset//", "tidydata")
 
