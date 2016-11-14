@@ -11,7 +11,7 @@
 
 
 ## Introduction ##
-The focus of this text is to document my journey and iterative coding of "run_analysis.R" .  This script is intended to collect, work with, and clean a data set to meet the 3 tidy requirements (i. Each variable forms a column. ii. Each observation forms a row. iii. Each type of obervational unit forms a table. Hadley Wickham).   For documentation on data and transformations use this link [CodeBook]("/README.md") .
+The focus of this text is to document my journey and iterative coding of "run_analysis.R" .  This script is intended to collect, work with, and clean a data set to meet the 3 tidy requirements (i. Each variable forms a column. ii. Each observation forms a row. iii. Each type of obervational unit forms a table. Hadley Wickham).   For documentation on data and transformations use this link [CodeBook]("README.md") .
 
 ## Background ##
 - Prior to writing code:
