@@ -63,13 +63,13 @@ df_total$activity <- factor(df_total$activity, labels = df_activity_labels$activ
 ## Decided to follow Hadley Wickham's style guide - http://stat405.had.co.nz/r-style.html - lowercase_underscore_separated
 names(df_total) <- gsub("^t", "time", names(df_total))         ## Time is more meaningful than t
 names(df_total) <- gsub("^f", "frequency", names(df_total))    ## Frequency is more meaningful than f
-names(df_total) <- gsub("BodyBody", "body", names(df_total))   ## Body vs BodyBody
+names(df_total) <- gsub("BodyBody", "Body", names(df_total))   ## Body vs BodyBody
 names(df_total) <- gsub("mean\\(\\)", "Mean", names(df_total)) ## Mean vs possible confusion a function call mean()
 names(df_total) <- gsub("std\\(\\)", "Std", names(df_total))   ## Std vs possible confusion a function call std()
 names(df_total) <- gsub("-", "" , names(df_total))             ## Underscore "_" vs possible Subtract confusion "-"
 names(df_total) <- gsub("([A-Z])", "_\\1", names(df_total))    ## Convert to underscore_separated
 names(df_total) <- tolower(names(df_total))                    ## Ensure all text is lowercase
-
+names(df_total)
 ## STEP 5. Create a second, independent tidy dataset
 ##         with the average of each variable for each activity and each subject_id.
 library(plyr)
