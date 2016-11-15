@@ -75,7 +75,10 @@ names(df_total)
 library(plyr)
 df_tidy_data <- ddply(df_total,c("activity", "subject_id"), colwise(mean))
 
-write_and_check(df_tidy_data, 3, 68, "UCI HAR Dataset//", "tidydata")
+## Submission wants a txt file.
+write_and_check_txt(df_tidy_data, 3, 68, "UCI HAR Dataset//", "tidydata")
+## Turned off
+##write_and_check_csv(df_tidy_data, 3, 68, "UCI HAR Dataset//", "tidydata")
 
 ## Final housekeeping, clean up the memory
 rm(list=ls())
